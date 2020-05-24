@@ -1,6 +1,7 @@
 import Phaser from "phaser";
 
 import sceneGame from './scenes/game'
+import sceneTitle from './scenes/title'
 
 const config = {
   type: Phaser.AUTO,
@@ -16,6 +17,7 @@ const config = {
     }
   },
   scene: [
+    sceneTitle,
     sceneGame
   ]
 };

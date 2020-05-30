@@ -10,9 +10,8 @@ export default class GameScene extends Phaser.Scene
 	{
     super({key: 'title'})
     
-    this.enterKey = undefined
+    this.enter = undefined
     this.staticText = undefined
-    this.copyright = undefined
     this.background = undefined
   }
 
@@ -30,6 +29,7 @@ export default class GameScene extends Phaser.Scene
 
 	create ()
 	{
+    console.log(this.game.config.width)
 		this.enter = this.input.keyboard.addKey('Enter');
     this.background = this.add.image(0, 0, SKY_KEY);
     this.background.setOrigin(0, 0);

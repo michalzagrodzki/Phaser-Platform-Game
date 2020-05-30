@@ -24,12 +24,11 @@ export default class GameScene extends Phaser.Scene
 	preload ()
 	{
     this.load.bitmapFont(FONT_KEY, './assets/Font_1.png', './assets/Font_1.xml');
-	  this.load.image(SKY_KEY, './assets/sky.png');
+	  this.load.image(SKY_KEY, './assets/BackgroundSky.png');
 	}
 
 	create ()
 	{
-    console.log(this.game.config.width)
 		this.enter = this.input.keyboard.addKey('Enter');
     this.background = this.add.image(0, 0, SKY_KEY);
     this.background.setOrigin(0, 0);

@@ -3,6 +3,7 @@ import Phaser from "phaser";
 import sceneGame from './scenes/game'
 import sceneTitle from './scenes/title'
 import sceneScore from './scenes/score'
+import sceneInput from './scenes/input'
 
 const config = {
   type: Phaser.AUTO,
@@ -20,7 +21,8 @@ const config = {
   scene: [
     sceneTitle,
     sceneGame,
-    sceneScore
+    sceneScore,
+    sceneInput
   ]
 };
 

@@ -22,82 +22,82 @@ export default class GameScene extends Phaser.Scene
   }
 
 
-anyKey (event) {
-  this.scene.resume('input');
-  let code = event.keyCode;
-  if (code >= Phaser.Input.Keyboard.KeyCodes.A && code <= Phaser.Input.Keyboard.KeyCodes.Z) {
-    this.pressKey(code)
-  }
-}
-
-pressKey (event) {
-  if (this.inputLength < this.inputLimit) {
-    const character = Object.keys(Phaser.Input.Keyboard.KeyCodes).find(key => Phaser.Input.Keyboard.KeyCodes[key] === event)
-    this.inputText.push(character)
-    this.inputLength += 1
-    this.scene.run('input', { characters: this.inputText })
-  }
-}
-
-startInputField () {
-  this.scene.launch('input', { characters: this.inputText });
-  this.scene.pause('input');
-}
-
-isNewHighscore () {
-  const highScoreTableLength = this.highscoreTable.length
-  const lastHighscore = this.highscoreTable[highScoreTableLength - 1]
-  return lastHighscore.score < this.score ? true : false
-}
-
-saveScore (inputName, inputScore) {
-  const name = inputName.join('');
-  const storedHighscore = localStorage.getItem('highscore');
-  const arrayHighscore = '[' + storedHighscore + ']'
-  const parsedHighscore = JSON.parse(arrayHighscore)
-  const userScore = {
-    score: inputScore,
-    name: name
-  }
-
-  if (storedHighscore === null) {
-    let highscore = []
-    const userScoreJSON = JSON.stringify(userScore)
-    highscore.push(userScoreJSON)
-    for (let i = 0; i < 4; i++) {
-      const scoreItem = {
-        score: '0',
-        name: '...',
-      }
-      const emptyScoreJSON = JSON.stringify(scoreItem)
-      highscore.push(emptyScoreJSON)
-    }
-    localStorage.setItem('highscore', highscore);
-  } else if (storedHighscore !== null) {
-    let newHighscore = []
-    let baseHighscore = parsedHighscore
-    const ofSmallerScore = (index) => { return index.score < userScore.score };
-    const newScoreIndex = baseHighscore.findIndex(ofSmallerScore);
-    
-    if (newScoreIndex >= 0) {
-      baseHighscore.splice(newScoreIndex, 0, userScore);
-      const trimmedHighscore = baseHighscore.slice(0,5);
-
-      for (let score of trimmedHighscore) {
-        const scoreString = JSON.stringify(score)
-        newHighscore.push(scoreString)
-      }
-
-      localStorage.setItem('highscore', newHighscore);
+  anyKey (event) {
+    this.scene.resume('input');
+    let code = event.keyCode;
+    if (code >= Phaser.Input.Keyboard.KeyCodes.A && code <= Phaser.Input.Keyboard.KeyCodes.Z) {
+      this.pressKey(code)
     }
   }
-}
 
-  preload () 
+  pressKey (event) {
+    if (this.inputLength < this.inputLimit) {
+      const character = Object.keys(Phaser.Input.Keyboard.KeyCodes).find(key => Phaser.Input.Keyboard.KeyCodes[key] === event)
+      this.inputText.push(character)
+      this.inputLength += 1
+      this.scene.run('input', { characters: this.inputText })
+    }
+  }
+
+  startInputField () {
+    this.scene.launch('input', { characters: this.inputText });
+    this.scene.pause('input');
+  }
+
+  isNewHighscore () {
+    const highScoreTableLength = this.highscoreTable.length
+    const lastHighscore = this.highscoreTable[highScoreTableLength - 1]
+    return lastHighscore.score < this.score ? true : false
+  }
+
+  saveScore (inputName, inputScore) {
+    const name = inputName.join('');
+    const storedHighscore = localStorage.getItem('highscore');
+    const arrayHighscore = '[' + storedHighscore + ']'
+    const parsedHighscore = JSON.parse(arrayHighscore)
+    const userScore = {
+      score: inputScore,
+      name: name
+    }
+
+    if (storedHighscore === null) {
+      let highscore = []
+      const userScoreJSON = JSON.stringify(userScore)
+      highscore.push(userScoreJSON)
+      for (let i = 0; i < 4; i++) {
+        const scoreItem = {
+          score: '0',
+          name: '...',
+        }
+        const emptyScoreJSON = JSON.stringify(scoreItem)
+        highscore.push(emptyScoreJSON)
+      }
+      localStorage.setItem('highscore', highscore);
+    } else if (storedHighscore !== null) {
+      let newHighscore = []
+      let baseHighscore = parsedHighscore
+      const ofSmallerScore = (index) => { return index.score < userScore.score };
+      const newScoreIndex = baseHighscore.findIndex(ofSmallerScore);
+      
+      if (newScoreIndex >= 0) {
+        baseHighscore.splice(newScoreIndex, 0, userScore);
+        const trimmedHighscore = baseHighscore.slice(0,5);
+
+        for (let score of trimmedHighscore) {
+          const scoreString = JSON.stringify(score)
+          newHighscore.push(scoreString)
+        }
+
+        localStorage.setItem('highscore', newHighscore);
+      }
+    }
+  }
+
+  preload (data) 
   {
     this.load.bitmapFont('font', './assets/Font_1.png', './assets/Font_1.xml');
     this.load.image('sky', './assets/BackgroundSky.png');
-    this.score = this.data.score;
+    this.score = data.score;
   }
 
   create () 

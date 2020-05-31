@@ -45,9 +45,10 @@ export default class GameScene extends Phaser.Scene
   }
 
   isNewHighscore () {
+    if (this.highscoreTable[0] === null) { return false }
     const highScoreTableLength = this.highscoreTable.length
     const lastHighscore = this.highscoreTable[highScoreTableLength - 1]
-    return lastHighscore.score < this.score ? true : false
+    return lastHighscore.score < this.score ? true : false;
   }
 
   saveScore (inputName, inputScore) {
@@ -93,15 +94,15 @@ export default class GameScene extends Phaser.Scene
     }
   }
 
-  preload (data) 
+  preload () 
   {
     this.load.bitmapFont('font', './assets/Font_1.png', './assets/Font_1.xml');
     this.load.image('sky', './assets/BackgroundSky.png');
-    this.score = data.score;
   }
 
-  create () 
+  create (data) 
   {
+    this.score = data.score;
     const changeView = () => {
       this.saveScore(this.inputText, this.score);
       this.scene.start('highscore');

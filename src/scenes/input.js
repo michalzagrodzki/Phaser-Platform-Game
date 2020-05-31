@@ -15,7 +15,7 @@ export default class GameScene extends Phaser.Scene
     this.load.bitmapFont('font', './assets/Font_1.png', './assets/Font_1.xml');
   }
 
-  create () {
+  create (data) {
     this.text = this.add.bitmapText(8 * 24, 8 * 29, 'font', 'ABCDEFGHIJ\nKLMNOPQRST\nUVWXYZ', 55);
     this.text.setLetterSpacing(30);
     this.text.setInteractive();

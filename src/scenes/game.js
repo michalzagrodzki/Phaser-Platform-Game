@@ -13,7 +13,7 @@ export default class GameScene extends Phaser.Scene
     this.player;
     this.cursors;
     this.stars;
-    this.score = 0;
+    this.score;
     this.scoreText;
     this.bombs;
     this.gameOver = false;
@@ -197,6 +197,7 @@ export default class GameScene extends Phaser.Scene
     this.load.spritesheet('dude', './assets/dude.png', { frameWidth: 32, frameHeight: 48 });
     this.width = this.game.config.width;
     this.height = this.game.config.height;
+    this.score = 0;
 	}
 
 	create()

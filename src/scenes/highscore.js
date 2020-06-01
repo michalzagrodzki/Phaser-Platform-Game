@@ -12,6 +12,22 @@ export default class GameScene extends Phaser.Scene
     this.titleTextOne
     this.enterKey
     this.background
+    this.scoreRow1 = {}
+    this.scoreRow2 = {}
+    this.scoreRow3 = {}
+    this.scoreRow4 = {}
+    this.scoreRow5 = {}
+    this.highScoreTable = []
+    this.distanceTable = [22, 28, 34, 40, 46]
+  }
+
+  preload () {
+    this.load.bitmapFont('font', './assets/Font_1.png', './assets/Font_1.xml');
+    this.load.image('sky', './assets/BackgroundSky.png');
+  }
+
+  create () {
+    this.highScoreTable = [];
     this.scoreRow1 = {
       rank: '',
       score: '',
@@ -37,16 +53,6 @@ export default class GameScene extends Phaser.Scene
       score: '',
       name: ''
     }
-    this.highScoreTable = []
-    this.distanceTable = [22, 28, 34, 40, 46]
-  }
-
-  preload () {
-    this.load.bitmapFont('font', './assets/Font_1.png', './assets/Font_1.xml');
-    this.load.image('sky', './assets/BackgroundSky.png');
-  }
-
-  create () {
     const storedHighscore = localStorage.getItem('highscore');
     const arrayHighscore = JSON.parse("[" + storedHighscore + "]");
     let sortedHighScore = arrayHighscore.sort((a,b) => { b.score - a.score })
@@ -63,6 +69,7 @@ export default class GameScene extends Phaser.Scene
 
     const changeView = () => {
       this.scene.start('title');
+      this.scene.stop('highscore');
     }
 
     this.enterKey = this.input.keyboard.addKey('Enter');

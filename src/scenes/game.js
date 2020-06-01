@@ -277,7 +277,10 @@ export default class GameScene extends Phaser.Scene
         this.continueText = this.add.bitmapText(8 * 24, 8 * 54, 'font', 'press any key to continue', 48);
 
         this.continue = this.input.keyboard.addKey('Enter');
-        this.continue.on('up', () => { this.scene.start('score', { score: this.score }); });
+        this.continue.on('up', () => { 
+          this.scene.start('score', { score: this.score });
+          this.scene.stop('game');
+        });
       }
     }
 

@@ -103,6 +103,7 @@ export default class GameScene extends Phaser.Scene
   create (data) 
   {
     this.score = data.score;
+    this.inputText = [];
     const changeView = () => {
       this.saveScore(this.inputText, this.score);
       this.scene.start('highscore');

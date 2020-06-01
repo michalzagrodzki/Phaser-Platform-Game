@@ -17,7 +17,7 @@ export default class GameScene extends Phaser.Scene
     this.enterKey
 
     this.inputText = []
-    this.inputLength = 0
+    this.inputLength;
     this.inputLimit = 3;
   }
 
@@ -103,6 +103,7 @@ export default class GameScene extends Phaser.Scene
   create (data) 
   {
     this.score = data.score;
+    this.inputLength = 0;
     this.inputText = [];
     const changeView = () => {
       this.saveScore(this.inputText, this.score);

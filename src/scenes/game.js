@@ -1,4 +1,6 @@
 import Phaser from 'phaser'
+import { createGround } from '../utils/ground'
+import { createPlatforms, destroyPlatforms } from '../utils/platform'
 
 export default class GameScene extends Phaser.Scene
 {
@@ -25,153 +27,6 @@ export default class GameScene extends Phaser.Scene
     this.height;
   }
   
-  insertGround (index, level, bitmap)
-  {
-    this.ground.create((32 * index) + 16, (32 * level) + 16, bitmap);
-  }
-  
-  insertPlatform (index, level, bitmap)
-  {
-    this.platforms.create((32 * index) + 16, (32 * level) + 16, bitmap);
-  }
-
-  createGround () {
-  
-    for (let i = 0; i < 25; i++) {
-      const upperGroundType = this.randomInt(1, 5);
-      const lowerGroundType = this.randomInt(1, 5);
-      console.log('upper ground')
-      console.log(upperGroundType)
-      console.log('lower ground')
-      console.log(lowerGroundType)
-      switch (upperGroundType) {
-        case 1:
-          this.insertGround(i, 17, 'ground_1');
-          break;
-        case 2:
-          this.insertGround(i, 17, 'ground_2');
-          break;
-        case 3:
-          this.insertGround(i, 17, 'ground_3');
-          break;
-        case 4:
-          this.insertGround(i, 17, 'ground_4');
-          break;
-        default:
-          this.insertGround(i, 17, 'ground_1');
-      }
-  
-      switch (lowerGroundType) {
-        case 1:
-          this.insertGround(i, 18, 'ground_5');
-          break;
-        case 2:
-          this.insertGround(i, 18, 'ground_6');
-          break;
-        case 3:
-          this.insertGround(i, 18, 'ground_7');
-          break;
-        case 4:
-          this.insertGround(i, 18, 'ground_8');
-          break;
-        default:
-          this.insertGround(i, 18, 'ground_5');
-      }
-    }
-  }
-
-  createPlatform (start, length, level) {
-    for (let i = start; i < start + length; i++) {
-      if (i === start || i === start + length - 1) {
-        const endPlatformType = this.randomInt(1, 3)
-        switch (endPlatformType) {
-          case 1:
-            this.insertPlatform(i, level, 'platformEnd');
-            break;
-          case 2:
-            this.insertPlatform(i, level, 'platformEnd_2');
-            break;
-          default:
-            this.insertPlatform(i, level, 'platformEnd');
-        }
-      } else {
-          const platformType = this.randomInt(1, 5)
-          switch (platformType) {
-            case 1:
-              this.insertPlatform(i, level, 'platformMiddle_1');
-              break;
-            case 2:
-              this.insertPlatform(i, level, 'platformMiddle_2');
-              break;
-            case 3:
-              this.insertPlatform(i, level, 'platformMiddle_3');
-              break;
-            case 4:
-              this.insertPlatform(i, level, 'platformMiddle_4');
-              break;
-            default:
-              this.insertPlatform(i, level, 'platformMiddle_1');
-          }
-      }
-    }
-  }
-
-  randomInt (min, max) {
-    return Math.floor(Math.random() * (max - min)) + min;
-  }
-
-  createPlatforms () {
-    const platformsQuantity = this.randomInt(3, 6);
-    let platformsArray = []
-  
-    for (let i = 0; i < platformsQuantity; i++) {
-      let platformLength;
-      let platformStart;
-      let platformLevel
-  
-      if (i === 0) {
-        platformLength = this.randomInt(2, 9);
-        platformStart = this.randomInt(0, 24 - platformLength);
-        platformLevel = this.randomInt(12, 14);
-      } else if (i === 1) {
-        const previousLevel = platformsArray[i - 1].level;
-        const minDistance = previousLevel - 2;
-        const maxDistance = previousLevel - 5;
-        platformLevel = this.randomInt(minDistance, maxDistance);
-  
-        const previousStart = platformsArray[0].start
-        
-        if (previousStart < 12) {
-          platformLength = this.randomInt(2, 9);
-          platformStart = this.randomInt(0, 12 - platformLength);
-        } else {
-          platformLength = this.randomInt(2, 9);
-          platformStart = this.randomInt(12, 24 - platformLength);
-        }
-      } else {
-        const previousLevel = platformsArray[i - 1].level;
-        platformLength = this.randomInt(2, 9);
-        platformStart = this.randomInt(0, 24 - platformLength);
-        platformLevel = this.randomInt(previousLevel, 3);
-      }
-      
-      const platformObject = {
-        length: platformLength,
-        start: platformStart,
-        level: platformLevel
-      }
-      platformsArray.push(platformObject);
-  
-      this.createPlatform(platformStart, platformLength, platformLevel);
-    }
-  }
-
-  destroyPlatforms () {
-    this.platforms.children.iterate(function (child) {
-      child.disableBody(true, true)
-    })
-  }
-
 	preload()
 	{
     this.load.bitmapFont('font', './assets/Font_1.png', './assets/Font_1.xml');
@@ -210,8 +65,8 @@ export default class GameScene extends Phaser.Scene
     this.platforms = this.physics.add.staticGroup();
     this.ground = this.physics.add.staticGroup();
 
-    this.createGround();
-    this.createPlatforms();
+    createGround(this);
+    createPlatforms(this);
 
     this.player = this.physics.add.sprite(100, 450, 'dude');
     this.physics.add.collider(this.player, [ this.platforms, this.ground ]);
@@ -247,9 +102,9 @@ export default class GameScene extends Phaser.Scene
 
         console.log(this.platforms)
 
-        this.destroyPlatforms();
+        destroyPlatforms(this);
 
-        this.createPlatforms();
+        createPlatforms(this);
 
         const x = (player.x < 400) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
         const bomb = this.bombs.create(x, 16, 'bomb');

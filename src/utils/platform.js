@@ -7,33 +7,34 @@ function createPlatforms (vm) {
     let platformLength;
     let platformStart;
     let platformLevel
-
-    if (i === 0) {
-      platformLength = randomInt(2, 9);
-      platformStart = randomInt(0, 24 - platformLength);
-      platformLevel = randomInt(12, 14);
-    } else if (i === 1) {
-      const previousLevel = platformsArray[i - 1].level;
-      const minDistance = previousLevel - 2;
-      const maxDistance = previousLevel - 5;
-      platformLevel = randomInt(minDistance, maxDistance);
-
-      const previousStart = platformsArray[0].start
-      
-      if (previousStart < 12) {
+    switch(i) {
+      case 0:
         platformLength = randomInt(2, 9);
-        platformStart = randomInt(0, 12 - platformLength);
-      } else {
+        platformStart = randomInt(0, 25 - platformLength);
+        platformLevel = randomInt(12, 14);
+        break;
+      case 1:
+        let previousLevel = platformsArray[i - 1].level;
+        const minDistance = previousLevel - 2;
+        const maxDistance = previousLevel - 5;
+        platformLevel = randomInt(minDistance, maxDistance);
+
+        const previousStart = platformsArray[0].start
+        
+        if (previousStart < 12) {
+          platformLength = randomInt(2, 9);
+          platformStart = randomInt(0, 12 - platformLength);
+        } else {
+          platformLength = randomInt(2, 9);
+          platformStart = randomInt(12, 24 - platformLength);
+        }
+        break;
+      default:
+        previousLevel = platformsArray[i - 1].level;
         platformLength = randomInt(2, 9);
-        platformStart = randomInt(12, 24 - platformLength);
-      }
-    } else {
-      const previousLevel = platformsArray[i - 1].level;
-      platformLength = randomInt(2, 9);
-      platformStart = randomInt(0, 24 - platformLength);
-      platformLevel = randomInt(previousLevel, 3);
+        platformStart = randomInt(0, 24 - platformLength);
+        platformLevel = randomInt(previousLevel, 3);
     }
-    
     const platformObject = {
       length: platformLength,
       start: platformStart,

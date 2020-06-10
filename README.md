@@ -5,6 +5,8 @@ A Phaser 3 sample project.
 ## Requirements
 
 [Node.js](https://nodejs.org) is required to install dependencies and run scripts via `npm`.
+[Parcel](https://parceljs.org) is required to run app. Please install it by typing:
+'npm install -g parcel-bundler'
 
 ## Available Commands
 

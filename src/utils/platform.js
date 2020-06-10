@@ -63,12 +63,12 @@ function createPlatforms (vm) {
     }
     console.log(platformsArray)
     
-    createPlatform(platformStart, platformLength, platformLevel, vm);
+    drawPlatform(platformStart, platformLength, platformLevel, vm);
   }
   
 };
 
-function createPlatform (start, length, level, vm) {
+function drawPlatform (start, length, level, vm) {
   for (let i = start; i < start + length; i++) {
     if (i === start || i === start + length - 1) {
       const endPlatformType = randomInt(1, 3)

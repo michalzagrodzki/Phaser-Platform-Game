@@ -4,23 +4,16 @@ function randomLevel (previous, min, max) {
   return randomInt(minDistance, maxDistance)
 };
 
-function createPlatforms (vm) {
-  const levelsQuantity = randomInt(3, 6);
-  
-  let platformsArray = []
+function createPlatformRows (levelsQuantity, vm) {
 
-  console.log('number of cycles')
-  console.log(levelsQuantity)
+  let platformsRowArray = []
 
   for (let level = 0; level < levelsQuantity; level++) {
     let platformLength;
     let platformStart;
     let platformLevel;
     let previousLevel;
-    if (level > 0) { previousLevel = platformsArray[level - 1].level; }
-    
-    console.log('previous level')
-    console.log(previousLevel)
+    if (level > 0) { previousLevel = platformsRowArray[level - 1].level; }
 
     switch(level) {
       case 0:
@@ -32,7 +25,7 @@ function createPlatforms (vm) {
         platformLevel = randomLevel(previousLevel, 2, 4)
         platformLength = /* randomInt(2, 9);*/ 24;
         platformStart = randomInt(0, 25 - platformLength);
-        /* const previousStart = platformsArray[0].start
+        /* const previousStart = platformsRowArray[0].start
         
         if (previousStart < 12) {
           platformLength = randomInt(2, 9);
@@ -56,15 +49,28 @@ function createPlatforms (vm) {
     }
     console.log('platform object level:')
     console.log(platformObject.level)
-    if (platformObject.level > 2) {
-      platformsArray.push(platformObject);
+    if (platformObject.level > 1) {
+      platformsRowArray.push(platformObject);
     } else {
       break;
     }
-    console.log(platformsArray)
+    console.log(platformsRowArray)
     
     drawPlatform(platformStart, platformLength, platformLevel, vm);
   }
+}
+
+function placePlatforms(level, previousLevel, vm) {
+
+}
+
+function createPlatforms (vm) {
+  const levelsQuantity = randomInt(3, 6);
+  
+  console.log('number of cycles')
+  console.log(levelsQuantity)
+
+  createPlatformRows(levelsQuantity, vm);
   
 };
 

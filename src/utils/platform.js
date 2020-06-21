@@ -80,13 +80,9 @@ function drawPlatforms (inputArray, vm) {
 
 function createPlatforms (vm) {
   const levelsQuantity = randomInt(3, 6);
-  console.log('number of levels')
-  console.log(levelsQuantity)
   let platforms = [];
   createPlatformRows(levelsQuantity, platforms, vm);
   drawPlatforms(platforms, vm);
-  console.log('all platforms')
-  console.log(platforms)
 };
 
 function drawPlatform (start, length, level, vm) {

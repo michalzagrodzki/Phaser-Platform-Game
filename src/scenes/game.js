@@ -31,8 +31,8 @@ export default class GameScene extends Phaser.Scene
 	{
     this.load.bitmapFont('font', './assets/Font_1.png', './assets/Font_1.xml');
     // this.load.image('grid', helpGrid);
-    this.load.image('sky', './assets/BackgroundSky.png');
-    this.load.image('background', './assets/Background.png')
+    this.load.image('sky', './assets/skyGrid.png');
+    // this.load.image('background', './assets/Background.png')
     this.load.image('ground_1', './assets/Ground_1.png');
     this.load.image('ground_2', './assets/Ground_2.png');
     this.load.image('ground_3', './assets/Ground_3.png');
@@ -58,7 +58,7 @@ export default class GameScene extends Phaser.Scene
 	create()
 	{
 		this.sky = this.add.image(this.width / 2, this.height / 2, 'sky');
-    this.background = this.add.image(this.width / 2, this.height / 2, 'background');
+    // this.background = this.add.image(this.width / 2, this.height / 2, 'background');
     // this.add.image(this.width / 2, this.height / 2, 'grid');
 
     this.scoreText = this.add.bitmapText(16, -8 * 4, 'font', 'Score: 0', 60).setTint(0xfbf7dd, 0xfbf7dd, 0xf0da4b, 0xf0da4b);
@@ -131,10 +131,13 @@ export default class GameScene extends Phaser.Scene
         this.gameOverScore = this.add.bitmapText(8 * 40, 8 * 36, 'font', 'score: ' + this.score, 64);
         this.continueText = this.add.bitmapText(8 * 24, 8 * 54, 'font', 'press any key to continue', 48);
 
-        this.continue = this.input.keyboard.addKey('Enter');
-        this.continue.on('up', () => { 
-          this.scene.start('score', { score: this.score });
-          this.scene.stop('game');
+        this.newGame = this.input.keyboard.addKey('Enter');
+        this.mainMenu = this.input.keyboard.addKey('Esc')
+        this.newGame.on('up', () => { 
+          this.scene.start('game');
+        });
+        this.mainMenu.on('up', () => { 
+          this.scene.start('title');
         });
       }
     }

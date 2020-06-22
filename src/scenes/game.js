@@ -129,7 +129,8 @@ export default class GameScene extends Phaser.Scene
       if (this.gameOver === true) {
         this.gameOverText = this.add.bitmapText(8 * 22, 8 * 18, 'font', 'GAME OVER', 128);
         this.gameOverScore = this.add.bitmapText(8 * 40, 8 * 36, 'font', 'score: ' + this.score, 64);
-        this.continueText = this.add.bitmapText(8 * 24, 8 * 54, 'font', 'press any key to continue', 48);
+        this.continueText = this.add.bitmapText(8 * 24, 8 * 54, 'font', 'press enter to play again', 48);
+        this.continueText = this.add.bitmapText(8 * 22, 8 * 58, 'font', 'press escape to go to main menu', 48);
 
         this.newGame = this.input.keyboard.addKey('Enter');
         this.mainMenu = this.input.keyboard.addKey('Esc')

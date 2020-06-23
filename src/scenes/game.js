@@ -1,6 +1,8 @@
 import Phaser from 'phaser'
+
 import { createGround } from '../utils/ground'
 import { createPlatforms, destroyPlatforms } from '../utils/platform'
+import { getScore, setScore } from '../utils/score'
 
 export default class GameScene extends Phaser.Scene
 {
@@ -16,6 +18,7 @@ export default class GameScene extends Phaser.Scene
     this.cursors;
     this.stars;
     this.score;
+    this.highscore;
     this.scoreText;
     this.bombs;
     this.gameOver = false;
@@ -127,6 +130,8 @@ export default class GameScene extends Phaser.Scene
 
       this.gameOver = true;
       if (this.gameOver === true) {
+        getScore(this);
+        setScore(this.score);
         this.gameOverText = this.add.bitmapText(8 * 22, 8 * 18, 'font', 'GAME OVER', 128);
         this.gameOverScore = this.add.bitmapText(8 * 40, 8 * 36, 'font', 'score: ' + this.score, 64);
         this.continueText = this.add.bitmapText(8 * 24, 8 * 54, 'font', 'press enter to play again', 48);

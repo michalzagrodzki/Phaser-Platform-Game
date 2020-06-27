@@ -24,6 +24,7 @@ export default class GameScene extends Phaser.Scene
     this.gameOver = false;
     this.gameOverText;
     this.gameOverScore;
+    this.gameOverPanel;
     this.continueText;
     this.continueKey;
     this.width;
@@ -52,6 +53,7 @@ export default class GameScene extends Phaser.Scene
     this.load.image('platformMiddle_4', './assets/Platform_6.png');
     this.load.image('bomb', './assets/bomb.png');
     this.load.image('star', './assets/star.png');
+    this.load.image('gameover', './assets/GameOver.png');
     this.load.spritesheet('dude', './assets/dude.png', { frameWidth: 32, frameHeight: 48 });
     this.width = this.game.config.width;
     this.height = this.game.config.height;
@@ -132,11 +134,11 @@ export default class GameScene extends Phaser.Scene
       if (this.gameOver === true) {
         getScore(this);
         setScore(this);
-        this.gameOverText = this.add.bitmapText(8 * 22, 8 * 18, 'font', 'GAME OVER', 128);
-        this.gameOverScore = this.add.bitmapText(8 * 36, 8 * 32, 'font', 'highscore: ' + this.highscore, 64);
-        this.gameOverScore = this.add.bitmapText(8 * 40, 8 * 38, 'font', 'score: ' + this.score, 64);
-        this.continueText = this.add.bitmapText(8 * 24, 8 * 54, 'font', 'press enter to play again', 48);
-        this.continueText = this.add.bitmapText(8 * 22, 8 * 58, 'font', 'press escape to go to main menu', 48);
+        this.gameOverPanel = this.add.image(this.width / 2, this.height / 2, 'gameover');
+        this.gameOverScore = this.add.bitmapText(8 * 36, 8 * 32, 'font', this.highscore, 64);
+        this.gameOverScore = this.add.bitmapText(8 * 40, 8 * 38, 'font', this.score, 64);
+        // this.continueText = this.add.bitmapText(8 * 24, 8 * 54, 'font', 'press enter to play again', 48);
+        // this.continueText = this.add.bitmapText(8 * 22, 8 * 58, 'font', 'press escape to go to main menu', 48);
 
         this.newGame = this.input.keyboard.addKey('Enter');
         this.mainMenu = this.input.keyboard.addKey('Esc')

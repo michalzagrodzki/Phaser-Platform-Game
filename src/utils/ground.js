@@ -1,39 +1,42 @@
 function createGround (vm) {
+  const UPPER_LEVEL = 17;
+  const LOWER_LEVEL = 18;
+
   for (let i = 0; i < 25; i++) {
     const upperGroundType = randomInt(1, 5);
     const lowerGroundType = randomInt(1, 5);
     switch (upperGroundType) {
       case 1:
-        insertGround(i, 17, 'ground_1', vm);
+        insertGround(i, UPPER_LEVEL, 'ground_1', vm);
         break;
       case 2:
-        insertGround(i, 17, 'ground_2', vm);
+        insertGround(i, UPPER_LEVEL, 'ground_2', vm);
         break;
       case 3:
-        insertGround(i, 17, 'ground_3', vm);
+        insertGround(i, UPPER_LEVEL, 'ground_3', vm);
         break;
       case 4:
-        insertGround(i, 17, 'ground_4', vm);
+        insertGround(i, UPPER_LEVEL, 'ground_4', vm);
         break;
       default:
-        insertGround(i, 17, 'ground_1', vm);
+        insertGround(i, UPPER_LEVEL, 'ground_1', vm);
     }
 
     switch (lowerGroundType) {
       case 1:
-        insertGround(i, 18, 'ground_5', vm);
+        insertGround(i, LOWER_LEVEL, 'ground_5', vm);
         break;
       case 2:
-        insertGround(i, 18, 'ground_6', vm);
+        insertGround(i, LOWER_LEVEL, 'ground_6', vm);
         break;
       case 3:
-        insertGround(i, 18, 'ground_7', vm);
+        insertGround(i, LOWER_LEVEL, 'ground_7', vm);
         break;
       case 4:
-        insertGround(i, 18, 'ground_8', vm);
+        insertGround(i, LOWER_LEVEL, 'ground_8', vm);
         break;
       default:
-        insertGround(i, 18, 'ground_5', vm);
+        insertGround(i, LOWER_LEVEL, 'ground_5', vm);
     }
   }
 };

@@ -9,16 +9,18 @@ import sceneHighscore from './scenes/highscore'
 const config = {
   type: Phaser.AUTO,
   parent: "phaser-example",
-  width: window.innerWidth / 2,
-  height: window.innerHeight / 2,
   pixelArt: true,
-  zoom: 2,
   physics: {
     default: 'arcade',
     arcade: {
       gravity: { y: 300 },
       debug: false
     }
+  },
+  scale: {
+    mode: Phaser.Scale.FIT,
+    width: window.outerWidth,
+    height: window.outerHeight
   },
   scene: [
     // sceneTitle,

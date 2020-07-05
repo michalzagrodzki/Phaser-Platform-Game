@@ -42,7 +42,7 @@ function createGround (vm) {
 };
 
 function insertGround (index, level, bitmap, vm) {
-  vm.ground.create((32 * index) + 16, (32 * level) + 16, bitmap);
+  vm.ground.create((32 * index) + 16, (32 * level) + 16, bitmap).setScale(1).refreshBody();
 };
 
 function randomInt (min, max) {

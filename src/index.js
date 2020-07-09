@@ -10,6 +10,8 @@ const config = {
   type: Phaser.AUTO,
   parent: "phaser-example",
   pixelArt: true,
+  width: window.outerWidth,
+  height: window.outerHeight,
   physics: {
     default: 'arcade',
     arcade: {
@@ -18,9 +20,7 @@ const config = {
     }
   },
   scale: {
-    mode: Phaser.Scale.FIT,
-    width: window.outerWidth,
-    height: window.outerHeight
+    mode: Phaser.Scale.FIT
   },
   scene: [
     // sceneTitle,

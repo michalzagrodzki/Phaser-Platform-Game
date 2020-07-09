@@ -63,7 +63,7 @@ export default class GameScene extends Phaser.Scene
 	create()
 	{
     console.log(this.game.config)
-    this.sky = this.add.image(this.width / 2, this.height / 2, 'sky');
+    this.sky = this.add.image(0, 0, 'sky').setOrigin(0);
     // this.background = this.add.image(this.width / 2, this.height / 2, 'background');
     // this.add.image(this.width / 2, this.height / 2, 'grid');
 

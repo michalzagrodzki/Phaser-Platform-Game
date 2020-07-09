@@ -29,6 +29,8 @@ export default class GameScene extends Phaser.Scene
     this.continueKey;
     this.width;
     this.height;
+    this.baseLevel;
+    this.spriteSize;
   }
   
 	preload()
@@ -57,6 +59,8 @@ export default class GameScene extends Phaser.Scene
     this.load.spritesheet('dude', './assets/dude.png', { frameWidth: 32, frameHeight: 48 });
     this.width = this.game.config.width;
     this.height = this.game.config.height;
+    this.spriteSize = 32;
+    this.baseLevel = Math.floor(this.height / this.spriteSize);
     this.score = 0;
 	}
 

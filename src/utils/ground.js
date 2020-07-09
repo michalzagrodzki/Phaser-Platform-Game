@@ -1,12 +1,6 @@
 function createGround (vm) {
-  console.log('height in createGround function')
-  console.log(vm.game.config.height)
-  console.log('number of levels')
-  const baseLevel = Math.floor(vm.game.config.height / 32);
-  console.log(baseLevel)
-  console.log(vm.game.config.height / 32)
-  const UPPER_LEVEL = baseLevel - 2;
-  const LOWER_LEVEL = baseLevel - 1;
+  const UPPER_LEVEL = vm.baseLevel - 2;
+  const LOWER_LEVEL = vm.baseLevel - 1;
 
   for (let i = 0; i < 25; i++) {
     const upperGroundType = randomInt(1, 5);

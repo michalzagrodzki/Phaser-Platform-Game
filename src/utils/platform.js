@@ -1,4 +1,4 @@
-function randomLevel (previous, min, max) {
+function randomLevel (vm, previous, min, max) {
   let minDistance = 12
   let maxDistance = 14
   
@@ -48,17 +48,17 @@ function createPlatformRows (levelsQuantity, inputArray, vm) {
 
     switch(level) {
       case 0:
-        platformLevel = randomLevel();
+        platformLevel = randomLevel(vm);
         levelsArray.push(platformLevel);
         placePlatforms(platformLevel, platformsRow)
         break;
       case 1:
-        platformLevel = randomLevel(previousLevel, 2, 4)
+        platformLevel = randomLevel(vm, previousLevel, 2, 4)
         levelsArray.push(platformLevel);
         placePlatforms(platformLevel, platformsRow)
         break;
       default:
-        platformLevel = randomLevel(previousLevel, 2, 3)
+        platformLevel = randomLevel(vm, previousLevel, 2, 3)
         levelsArray.push(platformLevel);
         placePlatforms(platformLevel, platformsRow)
     }

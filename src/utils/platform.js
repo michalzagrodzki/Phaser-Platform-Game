@@ -1,6 +1,6 @@
 function randomLevel (vm, previous, min, max) {
-  let minDistance = vm.baseLevel - 6;
-  let maxDistance = vm.baseLevel - 4;
+  let minDistance = vm.baseLevel - 7;
+  let maxDistance = vm.baseLevel - 5;
   if (previous) {
     minDistance = previous - min;
     maxDistance = previous - max;

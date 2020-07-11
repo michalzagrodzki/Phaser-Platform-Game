@@ -30,6 +30,7 @@ export default class GameScene extends Phaser.Scene
     this.width;
     this.height;
     this.baseLevel;
+    this.levelWidth;
     this.spriteSize;
     this.halfSpriteSize;
   }
@@ -63,12 +64,12 @@ export default class GameScene extends Phaser.Scene
     this.spriteSize = 32;
     this.halfSpriteSize = this.spriteSize / 2;
     this.baseLevel = Math.floor(this.height / this.spriteSize);
+    this.levelWidth = Math.ceil(this.width / this.spriteSize);
     this.score = 0;
 	}
 
 	create()
 	{
-    console.log(this.game.config)
     this.sky = this.add.image(0, 0, 'sky').setOrigin(0);
     // this.background = this.add.image(this.width / 2, this.height / 2, 'background');
     // this.add.image(this.width / 2, this.height / 2, 'grid');

@@ -1,6 +1,6 @@
 import Phaser from 'phaser'
 
-import { createGround } from '../utils/ground'
+import { createGround, randomInt } from '../utils/ground'
 import { createPlatforms, destroyPlatforms } from '../utils/platform'
 import { getScore, setScore } from '../utils/score'
 
@@ -31,6 +31,7 @@ export default class GameScene extends Phaser.Scene
     this.height;
     this.baseLevel;
     this.spriteSize;
+    this.halfSpriteSize;
   }
   
 	preload()
@@ -60,6 +61,7 @@ export default class GameScene extends Phaser.Scene
     this.width = this.game.config.width;
     this.height = this.game.config.height;
     this.spriteSize = 32;
+    this.halfSpriteSize = this.spriteSize / 2;
     this.baseLevel = Math.floor(this.height / this.spriteSize);
     this.score = 0;
 	}
@@ -78,7 +80,9 @@ export default class GameScene extends Phaser.Scene
     createGround(this);
     createPlatforms(this);
 
-    this.player = this.physics.add.sprite(100, 450, 'dude');
+    const playerPositionX = randomInt(0, this.width);
+    const playerPositionY = ((this.baseLevel - 5) * this.spriteSize) + this.halfSpriteSize;
+    this.player = this.physics.add.sprite(playerPositionX, playerPositionY, 'dude');
     this.physics.add.collider(this.player, [ this.platforms, this.ground ]);
 
     this.player.setBounce(0.2);

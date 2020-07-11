@@ -50,5 +50,6 @@ function randomInt (min, max) {
 };
 
 export {
-  createGround
+  createGround,
+  randomInt
 }

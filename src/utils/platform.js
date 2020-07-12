@@ -78,7 +78,9 @@ function drawPlatforms (inputArray, vm) {
 }
 
 function createPlatforms (vm) {
-  const levelsQuantity = randomInt(3, 6);
+  const minLevelsQuantity = Math.floor(vm.baseLevel / 6); 
+  const maxLevelQuantity = Math.floor(vm.baseLevel / 3);
+  const levelsQuantity = randomInt(minLevelsQuantity, maxLevelQuantity);
   let platforms = [];
   createPlatformRows(levelsQuantity, platforms, vm);
   drawPlatforms(platforms, vm);

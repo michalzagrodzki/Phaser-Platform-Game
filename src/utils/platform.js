@@ -36,7 +36,7 @@ function placePlatforms(level, platformsArray) {
 }
 function createPlatformRows (levelsQuantity, inputArray, vm) {
 
-  let vmPlatforms = inputArray;
+  let vmPlatformsRows = inputArray;
   let levelsArray = []
 
   for (let level = 0; level < levelsQuantity; level++) {
@@ -63,11 +63,11 @@ function createPlatformRows (levelsQuantity, inputArray, vm) {
     }
 
     platformsRow.forEach(platform => {
-      if (platform.level > 1) { vmPlatforms.push(platform); }
+      if (platform.level > 1) { vmPlatformsRows.push(platform); }
     });
 
   }
-  return vmPlatforms;
+  return vmPlatformsRows;
 }
 
 function drawPlatforms (inputArray, vm) {

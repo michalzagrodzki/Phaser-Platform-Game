@@ -89,11 +89,13 @@ export default class GameScene extends Phaser.Scene
     this.player.setBounce(0.2);
     this.player.setCollideWorldBounds(true);
 
+    const starAmount = Math.ceil(this.levelWidth / 2) - 1;
+
     this.stars = this.physics.add.group({
       key: 'star',
-      repeat: 12,
-      setXY: { x: 16, y: 0, stepX: 64 }
-    })
+      repeat: starAmount,
+      setXY: { x: this.halfSpriteSize, y: 0, stepX: this.spriteSize * 2 }
+    });
 
     this.stars.children.iterate(function (child) {
       child.setBounceY(Phaser.Math.FloatBetween(0.15, 0.3));
@@ -114,8 +116,6 @@ export default class GameScene extends Phaser.Scene
         });
 
         console.log('all stars collected')
-
-        console.log(this.platforms)
 
         destroyPlatforms(this);
 

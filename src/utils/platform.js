@@ -11,14 +11,12 @@ function randomLevel (vm, previous, min, max) {
 function validatePlatformPosition (object, vm) {
   if (object.start > vm.levelWidth) { return object }
   const platformSummary = object.start + object.width;
-  let platformCorrectedPosition = undefined;
-  if (platformSummary > (vm.levelWidth - 1)) {
-    platformCorrectedPosition = platformSummary - vm.levelWidth - 1
+  let correctPosition = 0;
+  if (platformSummary >= (vm.levelWidth - 1)) {
+    correctPosition = (platformSummary - vm.levelWidth) + 1
   }
-  if (platformCorrectedPosition > 0) {
-    object.width = platformCorrectedPosition;
-  } else if (platformCorrectedPosition <= 0) {
-    object.width = 1;
+  if (correctPosition > 0) {
+    object.start = object.start - correctPosition;
   }
   return object;
 }
@@ -44,27 +42,10 @@ function placePlatforms(level, platformsArray, vm) {
     if (platform > 0) { 
       previousLength = vmPlatformsArray[platform - 1].start + vmPlatformsArray[platform - 1].width 
       platformObject.start = randomInt(previousLength + MIN_PLATFORM_DISTANCE, previousLength + MAX_PLATFORM_DISTANCE);
-      console.log('--------------')
-      console.log('platform before validation')
-      console.log(platformObject) 
-      validatePlatformPosition(platformObject, vm);  
-      console.log('platform after validation')
-      console.log(platformObject)
+      validatePlatformPosition(platformObject, vm);
     } else {
       platformObject.start = randomInt(0, 5);
     }
-
-    
-
-    /*
-    console.log('platform level')
-    console.log(level)
-    console.log('platform values')
-    console.log(platformStart)
-    console.log(platformLength)
-    console.log('platform summary')
-    console.log(platformStart + platformLength)
-    */
     
     vmPlatformsArray.push(platformObject);
   }

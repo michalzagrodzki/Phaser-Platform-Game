@@ -9,17 +9,17 @@ function randomLevel (vm, previous, min, max) {
 };
 
 function validatePlatformPosition (object, vm) {
-  /*const platformSummary = start + length;
+  if (object.start > vm.levelWidth) { return object }
+  const platformSummary = object.start + object.width;
   let platformCorrectedPosition = undefined;
   if (platformSummary > (vm.levelWidth - 1)) {
     platformCorrectedPosition = platformSummary - vm.levelWidth - 1
   }
   if (platformCorrectedPosition > 0) {
-    length = platformCorrectedLength;
-  } else if (platformCorrectedLength <= 0) {
-    length = 1;
-  }*/
-  object.width = object.width + 1;
+    object.width = platformCorrectedPosition;
+  } else if (platformCorrectedPosition <= 0) {
+    object.width = 1;
+  }
   return object;
 }
 

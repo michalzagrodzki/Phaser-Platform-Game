@@ -1,6 +1,7 @@
 function createGround (vm) {
   const UPPER_LEVEL = vm.baseLevel - 2;
   const LOWER_LEVEL = vm.baseLevel - 1;
+  const BASE_LEVEL = vm.baseLevel;
   const LEVEL_WIDTH = vm.levelWidth;
 
   for (let i = 0; i < LEVEL_WIDTH; i++) {
@@ -39,6 +40,8 @@ function createGround (vm) {
       default:
         insertGround(i, LOWER_LEVEL, 'ground_5', vm);
     }
+
+    insertGround(i, BASE_LEVEL, 'ground_base', vm);
   }
 };
 

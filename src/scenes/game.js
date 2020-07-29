@@ -49,6 +49,7 @@ export default class GameScene extends Phaser.Scene
     this.load.image('ground_6', './assets/Ground_6.png');
     this.load.image('ground_7', './assets/Ground_7.png');
     this.load.image('ground_8', './assets/Ground_8.png');
+    this.load.image('ground_base', './assets/Ground_B.png');
     this.load.image('platformEnd', './assets/Platform_2.png');
     this.load.image('platformEnd_2', './assets/Platform_7.png');
     this.load.image('platformMiddle_1', './assets/Platform_3.png');

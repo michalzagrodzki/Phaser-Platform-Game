@@ -1,8 +1,3 @@
-function moveLeft (vm) {
-  console.log(vm)
-  // vm.player.setVelocityX(-160);
-}
-
 function createControls (vm) {
 
   const level = vm.controlsBaseLevel - (vm.controlSpriteSize / 4);
@@ -26,10 +21,6 @@ function createControls (vm) {
   vm.controls.buttonUp.setInteractive();
   vm.controls.buttonUp.on('pointerdown', () => { vm.controls.buttonUp.isDown = true });
   vm.controls.buttonUp.on('pointerup', () => { vm.controls.buttonUp.isDown = false });
-
-
-  console.log('controls vm')
-  console.log(vm)
 };
 
 export {

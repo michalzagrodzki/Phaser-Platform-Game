@@ -2,6 +2,7 @@ import Phaser from 'phaser'
 
 import { createGround, randomInt } from '../utils/ground'
 import { createPlatforms, destroyPlatforms } from '../utils/platform'
+import { createControls } from '../utils/controls'
 import { getScore, setScore } from '../utils/score'
 
 export default class GameScene extends Phaser.Scene
@@ -33,6 +34,7 @@ export default class GameScene extends Phaser.Scene
     this.levelWidth;
     this.spriteSize;
     this.halfSpriteSize;
+    this.controlsBaseLevel;
   }
   
 	preload()
@@ -56,6 +58,9 @@ export default class GameScene extends Phaser.Scene
     this.load.image('platformMiddle_2', './assets/Platform_4.png');
     this.load.image('platformMiddle_3', './assets/Platform_5.png');
     this.load.image('platformMiddle_4', './assets/Platform_6.png');
+    this.load.image('button_left', './assets/ButtonLeft.png');
+    this.load.image('button_right', './assets/ButtonRight.png');
+    this.load.image('button_up', './assets/ButtonUp.png');
     this.load.image('bomb', './assets/bomb.png');
     this.load.image('star', './assets/star.png');
     this.load.image('gameover', './assets/GameOver.png');
@@ -64,8 +69,10 @@ export default class GameScene extends Phaser.Scene
     this.height = this.game.config.height;
     this.spriteSize = 32;
     this.halfSpriteSize = this.spriteSize / 2;
+    this.controlSpriteSize = 28;
     this.baseLevel = Math.floor(this.height / this.spriteSize);
     this.levelWidth = Math.ceil(this.width / this.spriteSize);
+    this.controlsBaseLevel = this.height - this.controlSpriteSize;
     this.score = 0;
 	}
 
@@ -81,6 +88,7 @@ export default class GameScene extends Phaser.Scene
 
     createGround(this);
     createPlatforms(this);
+    createControls(this);
 
     const playerPositionX = randomInt(0, this.width);
     const playerPositionY = ((this.baseLevel - 5) * this.spriteSize) + this.halfSpriteSize;
@@ -185,21 +193,24 @@ export default class GameScene extends Phaser.Scene
   
   update () 
   {
-    if (this.cursors.left.isDown) {
+    if (this.cursors.left.isDown || this.controls.buttonLeft.isDown) {
       this.player.setVelocityX(-160);
       this.player.anims.play('left', true);
+      console.log()
     }
   
-    else if (this.cursors.right.isDown) {
+    else if (this.cursors.right.isDown || this.controls.buttonRight.isDown) {
+      this.controls.buttonLeft.isDown = false;
       this.player.setVelocityX(160);
       this.player.anims.play('right', true);
     }
+
     else {
       this.player.setVelocityX(0);
       this.player.anims.play('turn');
     }
   
-    if (this.cursors.up.isDown && this.player.body.touching.down) {
+    if ((this.cursors.up.isDown && this.player.body.touching.down) || (this.controls.buttonUp.isDown)) {
       this.player.setVelocityY(-330);
     }
   }

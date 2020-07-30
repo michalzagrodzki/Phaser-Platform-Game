@@ -9,6 +9,9 @@ const config = {
   pixelArt: true,
   width: window.outerWidth,
   height: window.outerHeight,
+  input :{
+    activePointers: 3
+  },
   physics: {
     default: 'arcade',
     arcade: {

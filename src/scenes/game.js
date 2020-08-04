@@ -64,6 +64,8 @@ export default class GameScene extends Phaser.Scene
     this.load.image('bomb', './assets/bomb.png');
     this.load.image('star', './assets/star.png');
     this.load.image('gameover', './assets/GameOver.png');
+    this.load.image('button_play_again', './assets/ButtonPlayAgain.png');
+    this.load.image('button_main_menu', './assets/ButtonMainMenu.png');
     this.load.spritesheet('dude', './assets/dude.png', { frameWidth: 32, frameHeight: 48 });
     this.width = this.game.config.width;
     this.height = this.game.config.height;
@@ -156,6 +158,19 @@ export default class GameScene extends Phaser.Scene
         this.gameOverPanel = this.add.image(this.width / 2, this.height / 2, 'gameover');
         this.gameOverScore = this.add.bitmapText((this.width / 2) + 64, (this.height / 2) - 24, 'font', this.highscore, 64);
         this.gameOverScore = this.add.bitmapText((this.width / 2) + 64, (this.height / 2) - 72, 'font', this.score, 64);
+
+        let buttonPlayAgain = this.add.sprite(this.width / 2, (this.height / 2) + 96, 'button_play_again');
+        let buttonMainMenu = this.add.sprite(this.width / 2, (this.height / 2) + 170, 'button_main_menu');
+
+        buttonPlayAgain.setInteractive();
+        buttonPlayAgain.on('pointerup', () => { 
+          this.scene.start('game');
+        });
+        
+        buttonMainMenu.setInteractive();
+        buttonMainMenu.on('pointerup', () => { 
+          this.scene.start('title');
+        });
   
         this.newGame = this.input.keyboard.addKey('Enter');
         this.mainMenu = this.input.keyboard.addKey('Esc');

@@ -23,7 +23,7 @@ const config = {
     mode: Phaser.Scale.FIT
   },
   scene: [
-    // sceneTitle,
+    sceneTitle,
     sceneGame
   ]
 };

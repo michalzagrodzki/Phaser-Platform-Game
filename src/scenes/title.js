@@ -2,6 +2,7 @@ import Phaser from 'phaser'
 
 const SKY_KEY = 'sky'
 const FONT_KEY = 'font'
+const BUTTON_PLAY_KEY = 'play_button'
 
 export default class GameScene extends Phaser.Scene
 {
@@ -25,6 +26,7 @@ export default class GameScene extends Phaser.Scene
 	{
     this.load.bitmapFont(FONT_KEY, './assets/Font_1.png', './assets/Font_1.xml');
     this.load.image(SKY_KEY, './assets/BackgroundSky.png');
+    this.load.image(BUTTON_PLAY_KEY, './assets/ButtonPlay.png');
     
     this.width = this.game.config.width;
     this.height = this.game.config.height;
@@ -48,6 +50,12 @@ export default class GameScene extends Phaser.Scene
     this.staticText = this.add.bitmapText(8 * 2, 8 * -2, FONT_KEY, 'GAME', 250).setTint(0xf0d470, 0xf0d470, 0xe2a46f, 0xe2a46f);
     this.staticText = this.add.bitmapText(8 * 8, 8 * 16, FONT_KEY, 'GAME', 200).setTint(0xe2a46f, 0xe2a46f, 0xc74b08, 0xc74b08);
     this.staticText = this.add.bitmapText(8 * 4, this.height / 1.1, FONT_KEY, '2020 MICHAL ZAGRODZKI', 48, 1);
+
+    let buttonPlay = this.add.sprite(this.width / 2, (this.height / 2) + 96, BUTTON_PLAY_KEY);
+    buttonPlay.setInteractive();
+    buttonPlay.on('pointerup', () => { 
+      this.scene.start('game');
+    });
 
     this.beginText = this.add.bitmapText(8 * 10, this.height / 1.5, FONT_KEY, 'PRESS ENTER TO START', 40);
     this.beginText.setInteractive();

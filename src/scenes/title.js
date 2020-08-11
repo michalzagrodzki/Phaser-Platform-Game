@@ -34,7 +34,8 @@ export default class GameScene extends Phaser.Scene
 
 	create ()
 	{
-    this.enter = this.input.keyboard.addKey('Enter');
+    console.log(this.width)
+    
     const topRectangle = new Phaser.Geom.Rectangle(0, 0, this.width, this.height / 4);
     const topColor = this.add.graphics({ fillStyle: { color: 0x99d1ea } })
     topColor.fillRectShape(topRectangle);
@@ -57,9 +58,11 @@ export default class GameScene extends Phaser.Scene
       this.scene.start('game');
     });
 
-    this.beginText = this.add.bitmapText(8 * 10, this.height / 1.5, FONT_KEY, 'PRESS ENTER TO START', 40);
-    this.beginText.setInteractive();
-    this.beginText.on('pointerup', () => this.changeView() );
-    this.enter.on('up', () => { this.changeView() });
+    if (this.width > 731) {
+      this.enter = this.input.keyboard.addKey('Enter');
+      this.beginText = this.add.bitmapText(8 * 10, this.height / 1.5, FONT_KEY, 'PRESS ENTER TO START', 40);
+      this.beginText.setInteractive();
+      this.enter.on('up', () => { this.changeView() });
+    }
 	}
 }

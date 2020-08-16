@@ -84,7 +84,7 @@ export default class GameScene extends Phaser.Scene
     // this.background = this.add.image(this.width / 2, this.height / 2, 'background');
     // this.add.image(this.width / 2, this.height / 2, 'grid');
 
-    this.scoreText = this.add.bitmapText(16, -8 * 4, 'font', 'Score: 0', 60).setTint(0xfbf7dd, 0xfbf7dd, 0xf0da4b, 0xf0da4b);
+    this.scoreText = this.add.bitmapText(16, -8 * 4, 'font', '0', 60).setTint(0xfbf7dd, 0xfbf7dd, 0xf0da4b, 0xf0da4b);
     this.platforms = this.physics.add.staticGroup();
     this.ground = this.physics.add.staticGroup();
 
@@ -118,8 +118,8 @@ export default class GameScene extends Phaser.Scene
     function collectStar (player, star) {
       star.disableBody(true, true);
 
-      this.score += 10;
-      this.scoreText.setText('Score: ' + this.score );
+      this.score += 1;
+      this.scoreText.setText(this.score );
 
       if (this.stars.countActive(true) === 0) {
         this.stars.children.iterate(function (child) {

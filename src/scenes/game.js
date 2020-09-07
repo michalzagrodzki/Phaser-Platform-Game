@@ -40,6 +40,7 @@ export default class GameScene extends Phaser.Scene
 	preload()
 	{
     this.load.bitmapFont('font', './assets/Font_1.png', './assets/Font_1.xml');
+    this.load.bitmapFont('scoreFont', './assets/Font_2.png', './assets/Font_2.xml')
     // this.load.image('grid', helpGrid);
     this.load.image('sky', './assets/skyGrid.png');
     // this.load.image('background', './assets/Background.png')
@@ -84,7 +85,7 @@ export default class GameScene extends Phaser.Scene
     // this.background = this.add.image(this.width / 2, this.height / 2, 'background');
     // this.add.image(this.width / 2, this.height / 2, 'grid');
 
-    this.scoreText = this.add.bitmapText(16, -8 * 4, 'font', '0', 60).setTint(0xfbf7dd, 0xfbf7dd, 0xf0da4b, 0xf0da4b);
+    this.scoreText = this.add.bitmapText(36, -10, 'scoreFont', '0', 40);
     this.platforms = this.physics.add.staticGroup();
     this.ground = this.physics.add.staticGroup();
 

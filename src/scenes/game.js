@@ -18,6 +18,7 @@ export default class GameScene extends Phaser.Scene
     this.player;
     this.cursors;
     this.stars;
+    this.scoreStar;
     this.score;
     this.highscore;
     this.scoreText;
@@ -82,10 +83,11 @@ export default class GameScene extends Phaser.Scene
 	create()
 	{
     this.sky = this.add.image(0, 0, 'sky').setOrigin(0);
+    this.scoreStar = this.add.image(4, 6, 'star').setOrigin(0);
     // this.background = this.add.image(this.width / 2, this.height / 2, 'background');
     // this.add.image(this.width / 2, this.height / 2, 'grid');
 
-    this.scoreText = this.add.bitmapText(36, -10, 'scoreFont', '0', 40);
+    this.scoreText = this.add.bitmapText(36, -2, 'scoreFont', '0', 28);
     this.platforms = this.physics.add.staticGroup();
     this.ground = this.physics.add.staticGroup();
 

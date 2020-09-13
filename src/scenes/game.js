@@ -22,6 +22,7 @@ export default class GameScene extends Phaser.Scene
     this.score;
     this.highscore;
     this.scoreText;
+    this.highScoreText;
     this.bombs;
     this.gameOver = false;
     this.gameOverText;
@@ -42,6 +43,7 @@ export default class GameScene extends Phaser.Scene
 	{
     this.load.bitmapFont('font', './assets/Font_1.png', './assets/Font_1.xml');
     this.load.bitmapFont('scoreFont', './assets/Font_2.png', './assets/Font_2.xml')
+    this.load.bitmapFont('highScoreFont', './assets/Font_3.png', './assets/Font_3.xml');
     // this.load.image('grid', helpGrid);
     this.load.image('sky', './assets/skyGrid.png');
     // this.load.image('background', './assets/Background.png')
@@ -159,8 +161,8 @@ export default class GameScene extends Phaser.Scene
         getScore(this);
         setScore(this);
         this.gameOverPanel = this.add.image(this.width / 2, this.height / 2, 'gameover');
-        this.gameOverScore = this.add.bitmapText((this.width / 2) + 64, (this.height / 2) - 24, 'font', this.highscore, 64);
-        this.gameOverScore = this.add.bitmapText((this.width / 2) + 64, (this.height / 2) - 72, 'font', this.score, 64);
+        this.gameOverScore = this.add.bitmapText((this.width / 2) + 64, (this.height / 2) - 16, 'highScoreFont', this.highscore, 53);
+        this.gameOverScore = this.add.bitmapText((this.width / 2) + 64, (this.height / 2) - 64, 'highScoreFont', this.score, 53);
 
         let buttonPlayAgain = this.add.sprite(this.width / 2, (this.height / 2) + 96, 'button_play_again');
         let buttonMainMenu = this.add.sprite(this.width / 2, (this.height / 2) + 170, 'button_main_menu');
